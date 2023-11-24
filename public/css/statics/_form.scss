@@ -1,0 +1,203 @@
+#edit {
+  justify-content: center;
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    font-size: 15px !important;
+    margin: 5px 0;
+  }
+}
+
+form {
+  margin: 20px 0;
+  min-width: 420px;
+  display: grid;
+}
+
+select {
+  padding: 10px 15px;
+  background-color: #222830;
+  border: none;
+  border-radius: 5px;
+  margin: 5px 0;
+  width: 100%;
+  max-width: 600px;
+  // selected color
+  option {
+    .dot {
+      height: 10px;
+      width: 10px;
+      border-radius: 50%;
+      margin: 0 5px;
+    }
+  }
+  option:checked {
+    background-color: #addd90;
+    color: #222830;
+  }
+}
+
+input:disabled {
+  color: #f29595;
+  background-color: #1b2026;
+}
+
+input[type="color"] {
+  height: 35px;
+  outline: none;
+  padding: 5px 15px;
+}
+
+input {
+  padding: 10px 15px;
+  background-color: #222830;
+  border: none;
+  border-radius: 5px;
+  margin: 5px 0;
+  width: 100%;
+  max-width: 600px;
+}
+
+textarea {
+  padding: 10px 15px;
+  background-color: #222830;
+  border: none;
+  border-radius: 5px;
+  margin: 5px 0;
+  width: 100%;
+  max-width: 600px;
+  resize: none;
+  height: 100px;
+}
+
+.submit_button {
+  background: #addd90;
+  color: #222830;
+  padding: 6px 12px;
+  border-radius: 5px;
+  border: none;
+  font-size: 15px;
+  transition: all 0.3s;
+  text-align: center;
+}
+
+.shake {
+  animation: shake 0.3s;
+  animation-iteration-count: infinite;
+}
+
+.toggle {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  margin: 5px 0;
+  &.disabled {
+    p {
+      color: #f29595;
+    }
+    .tbutton {
+      .layer {
+        background: #1b2026;
+      }
+      .knobs {
+        opacity: 0.5;
+      }
+      .checkbox {
+        cursor: not-allowed;
+      }
+    }
+  }
+  .tbutton {
+    position: relative;
+    width: 74px;
+    height: 36px;
+    .r,
+    .layer {
+      border-radius: 100px;
+    }
+    .knobs,
+    .layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+    }
+    .knobs {
+      z-index: 2;
+    }
+    .layer {
+      width: 100%;
+      background: #222830;
+      transition: 0.3s ease all;
+      z-index: 1;
+    }
+    .checkbox {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      margin: 0;
+      opacity: 0;
+      z-index: 3;
+    }
+  }
+  #button .knobs:before {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 20px;
+    height: 10px;
+    color: #fff;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 1;
+    padding: 9px 4px;
+    background-color: #f29595;
+    border-radius: 50%;
+    transition:
+      0.3s ease all,
+      left 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15);
+  }
+
+  #button .checkbox:active + .knobs:before {
+    width: 46px;
+    border-radius: 100px;
+  }
+
+  #button .checkbox:checked:active + .knobs:before {
+    margin-left: -26px;
+  }
+
+  #button .checkbox:checked + .knobs:before {
+    content: "";
+    left: 42px;
+    background-color: #addd90;
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+  20% {
+    transform: translate(-3px, 0px) rotate(1deg);
+  }
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg);
+  }
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
+  100% {
+    transform: translate(1px, -2px) rotate(-1deg);
+  }
+}
