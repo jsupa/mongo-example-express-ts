@@ -8,7 +8,9 @@ import expressLayouts from 'express-ejs-layouts'
 import passport from 'passport'
 import flash from 'express-flash'
 import morgan from 'morgan'
+import swaggerUi from 'swagger-ui-express'
 
+import swagger from './swagger'
 import config from './../config/config'
 import locals from './locals'
 import routes from './../config/routes'
@@ -42,7 +44,9 @@ class Server {
 
   private setDefaults = () => {
     this.app.use(morgan('dev'))
+    console.log(swagger)
     this.app.get('/ping', (req: Request, res: Response) => res.send('pong'))
+    this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swagger))
     this.app.set('trust proxy', true)
     this.app.use(bodyParser.json())
     this.app.use(bodyParser.urlencoded({ extended: true }))
