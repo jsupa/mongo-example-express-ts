@@ -53,8 +53,8 @@ class Server {
   }
 
   private setDefaults = () => {
-    this.app.use(morgan('dev'))
     this.app.use(i18n.init)
+    this.app.use(morgan('dev'))
     this.app.get('/ping', (req: Request, res: Response) => res.send('pong'))
     this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swagger))
     this.app.set('trust proxy', true)
@@ -72,10 +72,17 @@ class Server {
     this.app.use(locals)
     this.app.use(flash())
     this.app.use((req: Request, res: Response, next: NextFunction) => {
-      console.log(req.__('hi'))
-      String.prototype.t = function () {
-        return req.__(this.toString())
+      if ('t' in String.prototype) {
+        delete (String.prototype as any).t
       }
+
+      Object.defineProperty(String.prototype, 't', {
+        get: function () {
+          return req.__(this.toString())
+        },
+        configurable: true,
+      })
+
       next()
     })
   }
