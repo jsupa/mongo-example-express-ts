@@ -14,6 +14,7 @@ import swagger from './swagger'
 import config from './../config/config'
 import locals from './locals'
 import routes from './../config/routes'
+import { setLocaleByRequest } from '../prototypes/string.extension'
 
 class Server {
   private app: Express
@@ -43,8 +44,11 @@ class Server {
   }
 
   private setDefaults = () => {
+    this.app.use((req: Request, res: Response, next: NextFunction) => {
+      setLocaleByRequest(req)
+      next()
+    })
     this.app.use(morgan('dev'))
-    console.log(swagger)
     this.app.get('/ping', (req: Request, res: Response) => res.send('pong'))
     this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swagger))
     this.app.set('trust proxy', true)

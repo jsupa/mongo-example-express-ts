@@ -10,6 +10,13 @@ const router = Router()
  *     tags: [Server]
  *     summary: Ping the server
  *     description: Ping the server
+ *     parameters:
+ *      - name: Language
+ *        in: header
+ *        description: Language
+ *        required: false
+ *        schema:
+ *         type: string
  *     responses:
  *       200:
  *         description: pong
