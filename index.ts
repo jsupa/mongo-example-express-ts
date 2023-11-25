@@ -4,8 +4,6 @@ import { consola } from 'consola'
 import config from './config/config'
 import server from './lib/server'
 
-import './prototypes/string.extension'
-
 const init = async () => {
   consola.info('Initializing Application')
 

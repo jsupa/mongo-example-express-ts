@@ -9,12 +9,21 @@ import passport from 'passport'
 import flash from 'express-flash'
 import morgan from 'morgan'
 import swaggerUi from 'swagger-ui-express'
+import { I18n } from 'i18n'
+import YAML from 'yaml'
 
 import swagger from './swagger'
 import config from './../config/config'
 import locals from './locals'
 import routes from './../config/routes'
-import { setLocaleByRequest } from '../prototypes/string.extension'
+
+const i18n = new I18n({
+  locales: ['en', 'sk'],
+  directory: `./locales`,
+  extension: '.yml',
+  parser: YAML,
+  defaultLocale: 'en',
+})
 
 class Server {
   private app: Express
@@ -44,11 +53,8 @@ class Server {
   }
 
   private setDefaults = () => {
-    this.app.use((req: Request, res: Response, next: NextFunction) => {
-      setLocaleByRequest(req)
-      next()
-    })
     this.app.use(morgan('dev'))
+    this.app.use(i18n.init)
     this.app.get('/ping', (req: Request, res: Response) => res.send('pong'))
     this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swagger))
     this.app.set('trust proxy', true)
@@ -65,6 +71,13 @@ class Server {
     // this.app.use(passport.session)
     this.app.use(locals)
     this.app.use(flash())
+    this.app.use((req: Request, res: Response, next: NextFunction) => {
+      console.log(req.__('hi'))
+      String.prototype.t = function () {
+        return req.__(this.toString())
+      }
+      next()
+    })
   }
 }
 
