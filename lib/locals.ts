@@ -4,6 +4,9 @@ const locals = (req: Request, res: Response, next: NextFunction) => {
   res.locals.user = req.user
   res.locals.version = process.env.npm_package_version
   res.locals.truncate = truncate
+
+  stringTranslate(req)
+
   next()
 }
 
@@ -18,4 +21,17 @@ const truncate = (str: string, len: number) => {
     return newStr + '...'
   }
   return str
+}
+
+const stringTranslate = (req: Request) => {
+  if ('t' in String.prototype) {
+    delete (String.prototype as any).t
+  }
+
+  Object.defineProperty(String.prototype, 't', {
+    get: function () {
+      return req.__(this.toString())
+    },
+    configurable: true,
+  })
 }

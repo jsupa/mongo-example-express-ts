@@ -71,20 +71,6 @@ class Server {
     // this.app.use(passport.session)
     this.app.use(locals)
     this.app.use(flash())
-    this.app.use((req: Request, res: Response, next: NextFunction) => {
-      if ('t' in String.prototype) {
-        delete (String.prototype as any).t
-      }
-
-      Object.defineProperty(String.prototype, 't', {
-        get: function () {
-          return req.__(this.toString())
-        },
-        configurable: true,
-      })
-
-      next()
-    })
   }
 }
 
