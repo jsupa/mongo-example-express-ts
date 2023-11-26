@@ -7,6 +7,7 @@ const router = Router()
  * @openapi
  * /api/ping:
  *   get:
+ *     security: []
  *     tags: [Server]
  *     summary: Ping the server
  *     description: Ping the server

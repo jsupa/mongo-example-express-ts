@@ -7,6 +7,7 @@ const router = Router()
  * @openapi
  * /api/time:
  *   get:
+ *     security: []
  *     tags: [Server]
  *     summary: Get the server time
  *     description: Get the server time

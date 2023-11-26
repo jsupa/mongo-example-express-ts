@@ -1,1 +1,14 @@
-hi: Hello
+hi: Ahoj
+
+Unauthorized: Unauthorized
+Success: Success
+Bad Request: Bad Request
+
+error.required: is required
+error.not_valid: is not valid
+error.not_strong: is not strong enough
+error.already_exist: already exists
+
+attr.email: Email
+attr.password: Password
+

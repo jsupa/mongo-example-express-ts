@@ -1,1 +1,15 @@
 hi: Ahoj
+
+Unauthorized: Neautorizovaný
+Success: Úspech
+Bad Request: Chybá požiadavka
+
+error.required: je povinná položka
+error.not_valid: nie je platné
+error.not_strong: nie je dostatočne silné
+error.already_exist: už existuje
+error.not_found: neexistuje
+error.not_match: je nesprávne
+
+attr.email: Email
+attr.password: Heslo

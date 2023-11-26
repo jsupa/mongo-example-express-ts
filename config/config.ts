@@ -2,6 +2,7 @@ interface Config {
   env: string
   port: number
   mongoUri: string
+  jwtSecret: string
   session: {
     secret: string
     secure: boolean
@@ -13,6 +14,7 @@ const config = {
   env: 'development',
   port: 3000,
   mongoUri: 'mongodb://127.0.0.1:27017/dev',
+  jwtSecret: 'secret',
   session: {
     secret: 'secret',
     secure: false,

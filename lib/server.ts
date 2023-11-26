@@ -22,7 +22,6 @@ const i18n = new I18n({
   directory: `./locales`,
   extension: '.yml',
   parser: YAML,
-  defaultLocale: 'en',
 })
 
 class Server {
@@ -62,6 +61,8 @@ class Server {
     this.app.use(bodyParser.urlencoded({ extended: true }))
     this.app.use(cookieParser(config.session.secret))
     this.app.use(sessionConfig)
+    this.app.use(flash())
+    this.app.use(locals)
     this.app.use(expressLayouts)
     this.app.use(express.static('./public'))
     this.app.set('view engine', 'pug')
@@ -69,8 +70,6 @@ class Server {
     this.app.set('layout', './template')
     // this.app.use(passport.initialize)
     // this.app.use(passport.session)
-    this.app.use(locals)
-    this.app.use(flash())
   }
 }
 
@@ -101,8 +100,6 @@ const errorHandler = (error: Error, req: Request, res: Response, next: NextFunct
   res.status(res.statusCode || 500)
 
   const url = req.originalUrl || req.url
-
-  req.flash('error', error.message)
 
   res.render('error', {
     version: process.env.npm_package_version,
